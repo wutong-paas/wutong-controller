@@ -18,8 +18,7 @@ func main() {
 }
 
 func BuildConfigFromFlags() *option.Config {
-	// kubeconfig := flag.String("kubeconfig", "/root/.kube/config", "(optional) location to your kubeconfig file")
-	kubeconfig := flag.String("kubeconfig", "/root/source/wutong-paas/wutong-controller/kubeconfig", "kubeconfig file path")
+	kubeconfig := flag.String("kubeconfig", "/root/.kube/config", "(optional) location to your kubeconfig file")
 	resyncPeroid := flag.Duration("resync-period", 10*time.Minute, "resync period")
 	flag.Parse()
 
