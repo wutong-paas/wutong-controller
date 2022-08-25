@@ -1,8 +1,12 @@
 package option
 
-import "time"
+import (
+	"time"
+
+	"k8s.io/client-go/kubernetes"
+)
 
 type Config struct {
-	KubeConfig   string
+	KubeClient   kubernetes.Interface
 	ResyncPeriod time.Duration
 }

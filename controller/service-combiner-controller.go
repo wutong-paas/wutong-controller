@@ -30,15 +30,14 @@ type ServiceCombinerController struct {
 }
 
 func NewServiceCombinerController(conf *option.Config) *ServiceCombinerController {
-	clientset := KubeClient(conf)
-	informerFactory := informers.NewSharedInformerFactoryWithOptions(clientset, conf.ResyncPeriod, informers.WithTweakListOptions(func(lo *metav1.ListOptions) {
+	informerFactory := informers.NewSharedInformerFactoryWithOptions(conf.KubeClient, conf.ResyncPeriod, informers.WithTweakListOptions(func(lo *metav1.ListOptions) {
 		lo.LabelSelector = "creator=Wutong,service_type=inner"
 	}))
 	stopC := make(chan struct{})
 
 	serviceInformer := informerFactory.Core().V1().Services()
 	c := &ServiceCombinerController{
-		clientset:          clientset,
+		clientset:          conf.KubeClient,
 		serviceCacheSynced: serviceInformer.Informer().HasSynced,
 		serviceLister:      serviceInformer.Lister(),
 		queue:              workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "service-combiner"),
@@ -61,6 +60,7 @@ func NewServiceCombinerController(conf *option.Config) *ServiceCombinerControlle
 }
 
 func (c *ServiceCombinerController) Run() {
+	klog.Infoln("Starting service combiner controller.")
 	if !cache.WaitForCacheSync(c.stopC, c.serviceCacheSynced) {
 		klog.Infoln("waiting cache to be synced.")
 	}
