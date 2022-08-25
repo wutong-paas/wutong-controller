@@ -9,6 +9,7 @@ RUN go mod download
 
 COPY controller/ controller/
 COPY option/ option/
+COPY pkg/ pkg/
 COPY main.go main.go
 
 ARG TARGETOS TARGETARCH TARGETPLATFORM
