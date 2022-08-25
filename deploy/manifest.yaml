@@ -21,11 +21,11 @@ kind: ServiceAccount
 metadata:
   name: wutong-controller-sa
   namespace: wt-system
----    
+---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name:  name
+  name: name
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -43,13 +43,13 @@ spec:
     spec:
       serviceAccountName: wutong-controller-sa
       containers:
-      - name: controller
-        image: swr.cn-southwest-2.myhuaweicloud.com/wutong/wutong-controller:v1.0.0
-        imagePullPolicy: Always
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-          requests:
-            memory: "128Mi"
-            cpu: "250m"
+        - name: controller
+          image: swr.cn-southwest-2.myhuaweicloud.com/wutong/wutong-controller:v1.0.1
+          imagePullPolicy: Always
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+            requests:
+              memory: "128Mi"
+              cpu: "250m"

@@ -1,6 +1,7 @@
 # Wutong Controller
 ## controllers
 - service-combiner
+- telepresence-rbac
 - ...
 
 ## Install
