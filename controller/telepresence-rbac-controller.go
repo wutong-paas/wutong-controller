@@ -288,6 +288,11 @@ var (
 				Verbs:     []string{"update"},
 			},
 			{
+				APIGroups: []string{""},
+				Resources: []string{"pods/portforward"},
+				Verbs:     []string{"create"},
+			},
+			{
 				APIGroups: []string{"apps"},
 				Resources: []string{"deployments", "statefulsets", "replicasets"},
 				Verbs:     []string{"get", "list", "watch", "update"},
