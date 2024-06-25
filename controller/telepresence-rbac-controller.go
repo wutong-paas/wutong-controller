@@ -113,7 +113,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create service account %s failed: %v", saName(ns.Name), err)
 					return false
 				}
-				klog.Infof("create service account []", err.Error())
+				klog.Infof("create service account %s success", saName(ns.Name))
 			} else {
 				klog.Errorf("get service account %s failed: %v", saName(ns.Name), err)
 				return false
@@ -127,6 +127,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create cluster role %s failed: %v", tpdev4rb.Name, err)
 					return false
 				}
+				klog.Infof("create cluster role %s success", tpdev4rb.Name)
 			} else {
 				klog.Errorf("get cluster role %s failed: %v", tpdev4rb.Name, err)
 				return false
@@ -140,6 +141,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create role binding %s failed: %v", rbac.tprb.Name, err)
 					return false
 				}
+				klog.Infof("create role binding %s success", rbac.tprb.Name)
 			} else {
 				klog.Errorf("get role binding %s failed: %v", rbac.tprb.Name, err)
 				return false
@@ -153,6 +155,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create role binding %s failed: %v", rbac.nsrb.Name, err)
 					return false
 				}
+				klog.Infof("create role binding %s success", rbac.nsrb.Name)
 			} else {
 				klog.Errorf("get role binding %s failed: %v", rbac.nsrb.Name, err)
 				return false
@@ -166,6 +169,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create cluster role %s failed: %v", tpdev4crb.Name, err)
 					return false
 				}
+				klog.Infof("create cluster role %s success", tpdev4crb.Name)
 			} else {
 				klog.Errorf("get cluster role %s failed: %v", tpdev4crb.Name, err)
 				return false
@@ -179,6 +183,7 @@ func (c *TelepresenceRBACController) syncRBAC(obj interface{}) bool {
 					klog.Errorf("create cluster role binding %s failed: %v", rbac.crb.Name, err)
 					return false
 				}
+				klog.Infof("create cluster role binding %s success", rbac.crb.Name)
 			} else {
 				klog.Errorf("get cluster role binding %s failed: %v", rbac.crb.Name, err)
 				return false
