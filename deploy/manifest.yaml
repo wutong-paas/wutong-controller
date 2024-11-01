@@ -39,7 +39,7 @@ spec:
       serviceAccountName: wutong-controller-sa
       containers:
         - name: controller
-          image: swr.cn-southwest-2.myhuaweicloud.com/wutong/wutong-controller:v1.0.4
+          image: swr.cn-southwest-2.myhuaweicloud.com/wutong/wutong-controller:v1.0.5-alpha.1
           imagePullPolicy: Always
           resources:
             limits:

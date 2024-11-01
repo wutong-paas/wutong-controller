@@ -25,7 +25,7 @@ type ServiceCombinerController struct {
 	clientset          kubernetes.Interface
 	serviceCacheSynced cache.InformerSynced
 	serviceLister      corelisters.ServiceLister
-	queue              workqueue.RateLimitingInterface
+	queue              workqueue.TypedRateLimitingInterface[any]
 	stopC              chan struct{}
 }
 
@@ -40,7 +40,7 @@ func NewServiceCombinerController(conf *option.Config) *ServiceCombinerControlle
 		clientset:          conf.KubeClient,
 		serviceCacheSynced: serviceInformer.Informer().HasSynced,
 		serviceLister:      serviceInformer.Lister(),
-		queue:              workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "service-combiner"),
+		queue:              workqueue.NewNamedRateLimitingQueue(workqueue.DefaultTypedControllerRateLimiter[any](), "service-combiner"),
 		stopC:              stopC,
 	}
 	serviceInformer.Informer().AddEventHandler(cache.ResourceEventHandlerFuncs{

@@ -23,7 +23,7 @@ type TelepresenceRBACController struct {
 	clientset            kubernetes.Interface
 	namespaceCacheSynced cache.InformerSynced
 	namespaceLister      corelisters.NamespaceLister
-	queue                workqueue.RateLimitingInterface
+	queue                workqueue.TypedRateLimitingInterface[any]
 	stopC                chan struct{}
 }
 
@@ -38,7 +38,7 @@ func NewTelepresenceRBACController(conf *option.Config) *TelepresenceRBACControl
 		clientset:            conf.KubeClient,
 		namespaceCacheSynced: namespaceInformer.Informer().HasSynced,
 		namespaceLister:      namespaceInformer.Lister(),
-		queue:                workqueue.NewNamedRateLimitingQueue(workqueue.DefaultControllerRateLimiter(), "telepresence-rbac-controller"),
+		queue:                workqueue.NewNamedRateLimitingQueue(workqueue.DefaultTypedControllerRateLimiter[any](), "telepresence-rbac-controller"),
 		stopC:                stopC,
 	}
 
