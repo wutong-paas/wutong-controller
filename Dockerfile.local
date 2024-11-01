@@ -1,0 +1,13 @@
+FROM swr.cn-southwest-2.myhuaweicloud.com/wutong/alpine:3.15
+ARG TARGETARCH
+ENV TZ=Asia/Shanghai
+
+# RUN mkdir /app \
+#     && apk add --update apache2-utils \
+#     && rm -rf /var/cache/apk/*
+
+WORKDIR /
+
+COPY bin/controller-linux-${TARGETARCH} /controller
+
+CMD ["/controller"]
